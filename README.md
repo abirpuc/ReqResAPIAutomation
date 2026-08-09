@@ -1,6 +1,8 @@
-# API Automation Testing Using Postman
+# API Automation Testing Using Postman & Newman
 
 ## Resource: Reqres API for testing, Url: https://reqres.in/api
+
+## Project Overview: This project demonstration For API Automation using Postman & Newman.
 
 ## Testes:-
 - Log in with a registered user and capture the auth token.
@@ -13,6 +15,16 @@
 * Collection.json
 * Report file:
 
-## Tools:
+## Technologies & Tools
 - PostMan
-- 
+- Newman
+- Javascript
+- ReqresAPI
+- Git & Github
+- Vs code.
+
+## Project run command:
+### Run the project in CLI: newman run collection.js
+### For HTML report: newman run collection.js -r htmlextra
+
+----------------------------------------------------------
