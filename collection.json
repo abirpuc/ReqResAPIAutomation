@@ -1,0 +1,585 @@
+{
+  "info": {
+    "_postman_id": "a5f2ba7a-faf7-4919-8194-2124c89fb6b6",
+    "name": "API Automation Testing Projects - Fixed",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "31293931",
+    "_collection_link": "https://go.postman.co/collection/31293931-a5f2ba7a-faf7-4919-8194-2124c89fb6b6?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Dynamic",
+      "item": [
+        {
+          "name": "Post_Api",
+          "item": [
+            {
+              "name": "Login_user",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});",
+                      "",
+                      "const response = pm.response.json();",
+                      "pm.test(\"Auth token exists\", function () {",
+                      "    pm.expect(response.token).to.be.a(\"string\").and.not.empty;",
+                      "});",
+                      "pm.environment.set(\"Authtoken\", response.token);"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "x-api-key",
+                    "value": "{{api_key}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"eve.holt@reqres.in\",\n  \"password\": \"cityslicka\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/login?ajax=true",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "login"
+                  ],
+                  "query": [
+                    {
+                      "key": "ajax",
+                      "value": "true",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Login with missing Email Field",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 400\", function () {",
+                      "    pm.response.to.have.status(400);",
+                      "});",
+                      "const response = pm.response.json();",
+                      "pm.test(\"Error message is correct\", function () {",
+                      "    pm.expect(response.error).to.eql(\"Missing email or username\");",
+                      "});"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "x-api-key",
+                    "value": "{{api_key}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n\t\"password\":\"admin123\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/login?ajax=true",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "login"
+                  ],
+                  "query": [
+                    {
+                      "key": "ajax",
+                      "value": "true",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Login with missing password field",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 400\", function () {",
+                      "    pm.response.to.have.status(400);",
+                      "});",
+                      "const response = pm.response.json();",
+                      "pm.test(\"Error message is correct\", function () {",
+                      "    pm.expect(response.error).to.eql(\"Missing password\");",
+                      "});"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "x-api-key",
+                    "value": "{{api_key}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n\t\"email\":\"emma.wong@reqres.in\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/login?ajax=true",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "login"
+                  ],
+                  "query": [
+                    {
+                      "key": "ajax",
+                      "value": "true",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Get_Api",
+          "item": [
+            {
+              "name": "GetAllUsers",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});",
+                      "const response = pm.response.json();",
+                      "pm.test(\"Users array exists\", function () {",
+                      "    pm.expect(response.data).to.be.an(\"array\").and.not.empty;",
+                      "});"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "x-api-key",
+                    "value": "{{api_key}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/users?page=2&ajax=true",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "users"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "2",
+                      "type": "text"
+                    },
+                    {
+                      "key": "ajax",
+                      "value": "true",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "getUserId",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});",
+                      "const response = pm.response.json();",
+                      "pm.test(\"User has name and email\", function () {",
+                      "    pm.expect(response.data).to.have.property(\"first_name\").that.is.a(\"string\").and.not.empty;",
+                      "    pm.expect(response.data).to.have.property(\"last_name\").that.is.a(\"string\").and.not.empty;",
+                      "    pm.expect(response.data).to.have.property(\"email\").that.is.a(\"string\").and.not.empty;",
+                      "});"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "x-api-key",
+                    "value": "{{api_key}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/users/{{user_ID}}?ajax=true",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "users",
+                    "{{user_ID}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ajax",
+                      "value": "true",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "get User with wrong User ID",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 404\", function () {",
+                      "    pm.response.to.have.status(404);",
+                      "});"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "x-api-key",
+                    "value": "{{api_key}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/users/{{invalid_user}}?ajax=true",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "users",
+                    "{{invalid_user}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ajax",
+                      "value": "true",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Patch_Api",
+          "item": [
+            {
+              "name": "Update Single Field",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});",
+                      "const response = pm.response.json();",
+                      "const requestData = JSON.parse(pm.request.body.raw);",
+                      "pm.test(\"Email is updated correctly\", function () {",
+                      "    pm.expect(response.email).to.eql(requestData.email);",
+                      "});",
+                      "pm.test(\"updatedAt exists\", function () {",
+                      "    pm.expect(response.updatedAt).to.be.a(\"string\").and.not.empty;",
+                      "});"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "x-api-key",
+                    "value": "{{api_key}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"email\":\"senioursqa229@batch17.com\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/users/{{user_ID}}?ajax=true",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "users",
+                    "{{user_ID}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ajax",
+                      "value": "true",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Put Update User",
+          "item": [
+            {
+              "name": "update profile",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});",
+                      "const response = pm.response.json();",
+                      "const requestData = JSON.parse(pm.request.body.raw);",
+                      "pm.test(\"Name is updated correctly\", function () {",
+                      "    pm.expect(response.first_name).to.eql(requestData.first_name);",
+                      "    pm.expect(response.last_name).to.eql(requestData.last_name);",
+                      "});",
+                      "pm.test(\"Job is updated correctly\", function () {",
+                      "    pm.expect(response.job).to.eql(requestData.job);",
+                      "});",
+                      "pm.test(\"updatedAt exists\", function () {",
+                      "    pm.expect(response.updatedAt).to.be.a(\"string\").and.not.empty;",
+                      "});"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "x-api-key",
+                    "value": "{{api_key}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n\t\"first_name\":\"Mozzammel\",\r\n\t\"last_name\":\"Hossen\",\r\n    \"job\":\"SQA Engineer\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/users/{{user_ID}}?ajax=true",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "users",
+                    "{{user_ID}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ajax",
+                      "value": "true",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "https://reqres.in/api"
+    },
+    {
+      "key": "api_key",
+      "value": "reqres_12820d7274234cc8940a168dade068c8"
+    },
+    {
+      "key": "user_ID",
+      "value": "2"
+    },
+    {
+      "key": "invalid_user",
+      "value": "345"
+    }
+  ]
+}

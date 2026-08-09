@@ -1,0 +1,32 @@
+{
+  "id": "api-testing-environment",
+  "name": "API Testing Environment",
+  "values": [
+    {
+      "key": "baseUrl",
+      "value": "https://reqres.in/api",
+      "enabled": true
+    },
+    {
+      "key": "email",
+      "value": "your-email@example.com",
+      "enabled": true
+    },
+    {
+      "key": "password",
+      "value": "your-password",
+      "enabled": true
+    },
+    {
+      "key": "userId",
+      "value": "2",
+      "enabled": true
+    },
+    {
+      "key": "authToken",
+      "value": "",
+      "enabled": true
+    }
+  ],
+  "_postman_variable_scope": "environment"
+}
